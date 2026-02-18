@@ -22,6 +22,8 @@ templates = Jinja2Templates(directory="templates")
 # Ensure dirs exist
 os.makedirs("uploads", exist_ok=True)
 os.makedirs("processed", exist_ok=True)
+os.makedirs("static", exist_ok=True)
+
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
