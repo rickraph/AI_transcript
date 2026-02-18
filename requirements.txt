@@ -1,0 +1,9 @@
+fastapi
+python-multipart
+uvicorn
+jinja2
+pydub
+google-genai
+python-dotenv
+aiofiles
+audioop-lts

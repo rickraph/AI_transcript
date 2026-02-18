@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliveboard Audio Merger & Transcriber</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .olive-btn { background-color: #65d36e; color: white; }
+        .olive-btn:hover { background-color: #4CAF50; }
+        .olive-border { border-color: #65d36e; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center py-10">
+
+    <div class="w-full max-w-3xl bg-white shadow-xl rounded-lg p-8">
+        <div class="border-b pb-4 mb-6 flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl">O</div>
+            <h1 class="text-2xl font-bold text-gray-800">Audio Operations</h1>
+        </div>
+
+        <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center hover:border-green-500 transition-colors cursor-pointer bg-gray-50">
+            <p class="text-gray-500">Click to select or drag audio files here</p>
+            <input type="file" id="file-input" multiple accept="audio/*" class="hidden">
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Drag to Reorder</h3>
+            <ul id="file-list" class="space-y-2">
+                </ul>
+        </div>
+
+        <button id="process-btn" class="w-full mt-8 olive-btn font-semibold py-3 rounded-lg shadow transition-all opacity-50 cursor-not-allowed" disabled>
+            Merge & Transcribe
+        </button>
+
+        <div id="loader" class="hidden mt-6 text-center">
+            <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-green-500 mx-auto"></div>
+            <p class="text-gray-500 mt-2 text-sm">Merging and Transcribing (AI processing)...</p>
+        </div>
+
+        <div id="results" class="mt-10 hidden border-t pt-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">Success!</h2>
+            
+            <div class="mb-6 p-4 bg-gray-50 rounded-lg border">
+                <p class="text-sm text-gray-600 mb-2 font-semibold">Merged Audio Preview:</p>
+                <audio id="audio-player" controls class="w-full"></audio>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <button id="download-json-btn" class="flex items-center justify-center gap-2 bg-gray-800 text-white py-3 rounded hover:bg-gray-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download JSON
+                </button>
+                <button id="download-txt-btn" class="flex items-center justify-center gap-2 olive-btn py-3 rounded transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Download Full Transcript
+                </button>
+            </div>
+
+            <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-400 text-xs uppercase">Preview: transcription.json</span>
+                    <button onclick="copyJson()" class="text-green-400 text-xs hover:text-white">Copy to Clipboard</button>
+                </div>
+                <pre id="json-output" class="text-green-400 text-sm font-mono max-h-64 overflow-y-auto"></pre>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const fileList = document.getElementById('file-list');
+        const processBtn = document.getElementById('process-btn');
+        const downloadJsonBtn = document.getElementById('download-json-btn');
+        const downloadTxtBtn = document.getElementById('download-txt-btn');
+        
+        let filesData = [];
+        let currentTranscription = null;
+
+        // Click to upload
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFiles);
+
+        // Drag and drop handlers for the dropzone
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-green-500'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-green-500'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-green-500');
+            const newFiles = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('audio/'));
+            if(newFiles.length > 0) {
+                filesData = [...filesData, ...newFiles];
+                renderList();
+            }
+        });
+
+        function handleFiles(e) {
+            const newFiles = Array.from(e.target.files);
+            filesData = [...filesData, ...newFiles];
+            renderList();
+        }
+
+        function renderList() {
+            fileList.innerHTML = '';
+            filesData.forEach((file) => {
+                const li = document.createElement('li');
+                li.className = 'bg-white border border-gray-200 p-3 rounded shadow-sm flex justify-between items-center cursor-move';
+                li.setAttribute('data-filename', file.name);
+                li.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-400">☰</span>
+                        <span class="text-gray-700 font-medium truncate w-64">${file.name}</span>
+                        <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">${(file.size / 1024 / 1024).toFixed(2)} MB</span>
+                    </div>
+                    <button onclick="removeFile('${file.name}')" class="text-red-400 hover:text-red-600">✕</button>
+                `;
+                fileList.appendChild(li);
+            });
+
+            if (filesData.length > 0) {
+                processBtn.disabled = false;
+                processBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                processBtn.disabled = true;
+                processBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        window.removeFile = function(name) {
+            filesData = filesData.filter(f => f.name !== name);
+            renderList();
+        }
+
+        new Sortable(fileList, {
+            animation: 150,
+            ghostClass: 'bg-green-50'
+        });
+
+        // --- PROCESS & DOWNLOAD LOGIC ---
+
+        processBtn.addEventListener('click', async () => {
+            const loader = document.getElementById('loader');
+            const results = document.getElementById('results');
+            
+            loader.classList.remove('hidden');
+            results.classList.add('hidden');
+            processBtn.disabled = true;
+
+            const formData = new FormData();
+            const listItems = fileList.querySelectorAll('li');
+            const order = Array.from(listItems).map(li => li.getAttribute('data-filename')).join(',');
+            
+            formData.append('file_order', order);
+            filesData.forEach(file => formData.append('files', file));
+
+            try {
+                const response = await fetch('/process/', { method: 'POST', body: formData });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    // Store data for download buttons
+                    currentTranscription = data.transcription;
+
+                    // Update UI
+                    document.getElementById('audio-player').src = data.merged_audio_url;
+                    document.getElementById('json-output').textContent = JSON.stringify(data.transcription, null, 2);
+                    results.classList.remove('hidden');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            } catch (err) {
+                alert('Network Error: ' + err.message);
+            } finally {
+                loader.classList.add('hidden');
+                processBtn.disabled = false;
+            }
+        });
+
+        // Function to create and click a download link
+        function downloadFile(content, filename, contentType) {
+            const blob = new Blob([content], { type: contentType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+
+        // Button Listeners
+        downloadJsonBtn.addEventListener('click', () => {
+            if (!currentTranscription) return;
+            const jsonStr = JSON.stringify(currentTranscription, null, 2);
+            downloadFile(jsonStr, 'transcription.json', 'application/json');
+        });
+
+        downloadTxtBtn.addEventListener('click', () => {
+            if (!currentTranscription) return;
+            // We use the "full_text" field which contains the combined transcript
+            const textContent = currentTranscription.full_text || "No text found.";
+            downloadFile(textContent, 'full_transcript.txt', 'text/plain');
+        });
+
+        function copyJson() {
+            const text = document.getElementById('json-output').textContent;
+            navigator.clipboard.writeText(text);
+            alert("JSON copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
