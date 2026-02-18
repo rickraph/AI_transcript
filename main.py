@@ -11,18 +11,32 @@ from dotenv import load_dotenv
 from services import merge_audios, transcribe_audio
 
 # Load .env
+import os
+import shutil
+import uuid
+from typing import List
+import aiofiles
+from fastapi import FastAPI, UploadFile, File, Request, Form
+from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from dotenv import load_dotenv
+from services import merge_audios, transcribe_audio
+
+# Load .env
 load_dotenv()
 
 app = FastAPI(title="Oliveboard Audio Transcriber")
 
-# Mounts
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
-
-# Ensure dirs exist
+# --- FIX START: Create ALL required directories ---
 os.makedirs("uploads", exist_ok=True)
 os.makedirs("processed", exist_ok=True)
-os.makedirs("static", exist_ok=True)
+os.makedirs("static", exist_ok=True)  # <--- THIS LINE IS CRITICAL
+# --- FIX END ---
+
+# Mounts (Now this won't crash because we just created the folder above)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/", response_class=HTMLResponse)
