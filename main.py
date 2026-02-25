@@ -11,19 +11,6 @@ from dotenv import load_dotenv
 from services import merge_audios, transcribe_audio
 
 # Load .env
-import os
-import shutil
-import uuid
-from typing import List
-import aiofiles
-from fastapi import FastAPI, UploadFile, File, Request, Form
-from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from dotenv import load_dotenv
-from services import merge_audios, transcribe_audio
-
-# Load .env
 load_dotenv()
 
 app = FastAPI(title="Oliveboard Audio Transcriber")
@@ -138,7 +125,7 @@ async def generate_timeline(
         TIMELINE_PROMPT = open(os.path.join(os.path.dirname(__file__), "timeline_prompt.txt")).read()
 
         response = client.models.generate_content(
-            model="gemini-2.5-pro-preview-06-05",
+            model="gemini-2.5-pro",
             contents=[
                 types.Content(
                     role="user",

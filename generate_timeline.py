@@ -316,7 +316,7 @@ def main():
     print("Sending to Gemini for timeline generation...")
 
     response = client.models.generate_content(
-        model="gemini-2.5-pro-preview-06-05",
+        model="gemini-2.5-pro",
         contents=[
             types.Content(
                 role="user",
