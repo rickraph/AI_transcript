@@ -1071,5 +1071,300 @@
             });
         });
     </script>
+
+    <!-- ══════════════════════════════════════
+         TIMELINE PLANNER SECTION
+    ══════════════════════════════════════ -->
+    <style>
+        .timeline-section {
+            max-width: 700px;
+            margin: 2.5rem auto 0;
+            padding: 0 1.5rem 3rem;
+        }
+        .timeline-card {
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid rgba(0,174,239,0.15);
+            box-shadow: 0 4px 24px rgba(0,174,239,0.08);
+            overflow: hidden;
+        }
+        .timeline-header {
+            background: linear-gradient(135deg, #0090CC, #00AEEF);
+            padding: 1.5rem 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .timeline-header-icon {
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+        .timeline-header h3 {
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        .timeline-header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+        .timeline-body {
+            padding: 1.5rem 1.75rem;
+        }
+        .timeline-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .upload-zone-sm {
+            border: 1.5px dashed rgba(0,174,239,0.35);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--sky-pale);
+            position: relative;
+        }
+        .upload-zone-sm:hover {
+            border-color: var(--sky);
+            background: #daf3ff;
+        }
+        .upload-zone-sm input[type=file] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+        }
+        .upload-zone-sm .uz-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+        .upload-zone-sm .uz-label { font-size: 0.72rem; font-weight: 600; color: var(--sky-dark); }
+        .upload-zone-sm .uz-hint { font-size: 0.66rem; color: var(--muted); margin-top: 2px; }
+        .upload-zone-sm .uz-selected { font-size: 0.7rem; color: var(--success); font-weight: 600; margin-top: 4px; word-break: break-all; }
+        .generate-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, var(--sky-dark), var(--sky));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .generate-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,174,239,0.35); }
+        .generate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .timeline-status {
+            margin-top: 1rem;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            display: none;
+        }
+        .timeline-status.loading {
+            display: flex; align-items: center; gap: 0.6rem;
+            background: var(--sky-pale); color: var(--sky-dark);
+            border: 1px solid rgba(0,174,239,0.2);
+        }
+        .timeline-status.success {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #f0fdf4; color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .timeline-status.error {
+            display: flex; align-items: center; gap: 0.6rem;
+            background: #fef2f2; color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .spinner-sm {
+            width: 14px; height: 14px;
+            border: 2px solid rgba(0,174,239,0.2);
+            border-top-color: var(--sky);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            flex-shrink: 0;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .dl-master-btn {
+            padding: 0.4rem 0.85rem;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .dl-master-btn:hover { background: #059669; }
+        .or-divider {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 500;
+            margin: 0.4rem 0 0.8rem;
+            position: relative;
+        }
+        .or-divider::before, .or-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: var(--border);
+        }
+        .or-divider::before { left: 0; }
+        .or-divider::after { right: 0; }
+        .use-current-btn {
+            width: 100%;
+            padding: 0.55rem;
+            background: transparent;
+            color: var(--sky);
+            border: 1.5px solid rgba(0,174,239,0.3);
+            border-radius: 10px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 0.8rem;
+        }
+        .use-current-btn:hover { background: var(--sky-pale); border-color: var(--sky); }
+        .use-current-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    </style>
+
+    <div class="timeline-section">
+        <div class="timeline-card">
+            <div class="timeline-header">
+                <div class="timeline-header-icon">🎬</div>
+                <div>
+                    <h3>Timeline Planner → master_plan.json</h3>
+                    <p>Upload transcription JSON + slide doc to generate a DaVinci Resolve timeline</p>
+                </div>
+            </div>
+            <div class="timeline-body">
+                <button class="use-current-btn" id="use-current-btn" disabled>
+                    ⚡ Use current transcription result
+                </button>
+
+                <div class="timeline-row">
+                    <div class="upload-zone-sm" id="json-drop">
+                        <input type="file" id="timeline-json-input" accept=".json">
+                        <div class="uz-icon">📄</div>
+                        <div class="uz-label">Transcription JSON</div>
+                        <div class="uz-hint">from /process/ output</div>
+                        <div class="uz-selected" id="json-selected-name"></div>
+                    </div>
+                    <div class="upload-zone-sm" id="doc-drop">
+                        <input type="file" id="timeline-doc-input" accept=".pdf,.docx,.doc">
+                        <div class="uz-icon">📑</div>
+                        <div class="uz-label">Slide Script</div>
+                        <div class="uz-hint">.pdf or .docx</div>
+                        <div class="uz-selected" id="doc-selected-name"></div>
+                    </div>
+                </div>
+
+                <button class="generate-btn" id="generate-btn" disabled>
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" style="width:16px;height:16px;stroke:currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+                    Generate master_plan.json
+                </button>
+
+                <div class="timeline-status" id="timeline-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Timeline Planner Logic
+        let timelineJsonBlob = null;
+        let timelineJsonFilename = 'transcription.json';
+        let timelineDocFile = null;
+
+        const jsonInput = document.getElementById('timeline-json-input');
+        const docInput = document.getElementById('timeline-doc-input');
+        const generateBtn = document.getElementById('generate-btn');
+        const useCurrentBtn = document.getElementById('use-current-btn');
+        const timelineStatus = document.getElementById('timeline-status');
+
+        function checkGenerateReady() {
+            generateBtn.disabled = !(timelineJsonBlob && timelineDocFile);
+        }
+
+        jsonInput.addEventListener('change', () => {
+            if (jsonInput.files[0]) {
+                timelineJsonBlob = jsonInput.files[0];
+                timelineJsonFilename = jsonInput.files[0].name;
+                document.getElementById('json-selected-name').textContent = jsonInput.files[0].name;
+                checkGenerateReady();
+            }
+        });
+
+        docInput.addEventListener('change', () => {
+            if (docInput.files[0]) {
+                timelineDocFile = docInput.files[0];
+                document.getElementById('doc-selected-name').textContent = docInput.files[0].name;
+                checkGenerateReady();
+            }
+        });
+
+        // Hook into existing transcription result
+        const origResults = document.getElementById('results');
+        const observer = new MutationObserver(() => {
+            if (currentTranscription) {
+                useCurrentBtn.disabled = false;
+            }
+        });
+        observer.observe(origResults, { attributes: true, attributeFilter: ['class'] });
+
+        useCurrentBtn.addEventListener('click', () => {
+            if (!currentTranscription) return;
+            const jsonStr = JSON.stringify(currentTranscription, null, 2);
+            timelineJsonBlob = new Blob([jsonStr], { type: 'application/json' });
+            timelineJsonFilename = 'transcription.json';
+            document.getElementById('json-selected-name').textContent = '✓ Current transcription loaded';
+            checkGenerateReady();
+        });
+
+        generateBtn.addEventListener('click', async () => {
+            if (!timelineJsonBlob || !timelineDocFile) return;
+
+            generateBtn.disabled = true;
+            timelineStatus.className = 'timeline-status loading';
+            timelineStatus.innerHTML = '<div class="spinner-sm"></div> Sending to Gemini — this may take 30–90 seconds…';
+
+            try {
+                const formData = new FormData();
+                formData.append('transcription_json', timelineJsonBlob, timelineJsonFilename);
+                formData.append('slide_doc', timelineDocFile, timelineDocFile.name);
+
+                const resp = await fetch('/generate-timeline/', { method: 'POST', body: formData });
+                const data = await resp.json();
+
+                if (data.status === 'success') {
+                    timelineStatus.className = 'timeline-status success';
+                    timelineStatus.innerHTML = `
+                        <span>✅ ${data.clip_count} clips generated</span>
+                        <a class="dl-master-btn" href="${data.download_url}" download="master_plan.json">Download master_plan.json</a>
+                    `;
+                } else {
+                    throw new Error(data.message || 'Unknown error');
+                }
+            } catch (err) {
+                timelineStatus.className = 'timeline-status error';
+                timelineStatus.innerHTML = `❌ Error: ${err.message}`;
+            } finally {
+                generateBtn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
