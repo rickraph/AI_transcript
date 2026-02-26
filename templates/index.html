@@ -7,23 +7,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ob-blue: #32B5E5;
-            --ob-blue-dark: #2196C7;
-            --ob-blue-deeper: #1A7BA3;
-            --ob-blue-light: #5FC9ED;
-            --ob-blue-pale: #E8F7FC;
-            --ob-blue-glow: rgba(50, 181, 229, 0.25);
-            --ob-charcoal: #1A1A2E;
-            --ob-charcoal-light: #2D2D4E;
+            --ob-blue: #38BDF8;
+            --ob-blue-dark: #0284C7;
+            --ob-blue-deeper: #0369A1;
+            --ob-blue-light: #7DD3FC;
+            --ob-blue-pale: #E0F2FE;
+            --ob-blue-glow: rgba(56, 189, 248, 0.3);
+            --ob-navy: #0F172A;
+            --ob-navy-mid: #1E3A5F;
+            --ob-navy-light: #1E40AF;
+            --ob-charcoal: #0F172A;
+            --ob-charcoal-light: #1E3A5F;
             --ob-red: #E53935;
             --bg: #F0F8FF;
             --surface: #FFFFFF;
-            --border: #D6EEF8;
-            --border-hover: #A8D8EE;
-            --border-blue: rgba(50, 181, 229, 0.3);
-            --text: #1E293B;
-            --text-secondary: #475569;
-            --text-muted: #94A3B8;
+            --border: #BAE6FD;
+            --border-hover: #7DD3FC;
+            --border-blue: rgba(56, 189, 248, 0.35);
+            --text: #0F172A;
+            --text-secondary: #334155;
+            --text-muted: #64748B;
             --success: #10B981;
             --success-light: #D1FAE5;
             --success-glow: rgba(16, 185, 129, 0.15);
@@ -35,10 +38,10 @@
             --radius-xl: 24px;
             --font: 'Plus Jakarta Sans', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-            --shadow: 0 4px 16px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
-            --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
-            --shadow-blue: 0 4px 20px rgba(50,181,229,0.2), 0 1px 4px rgba(50,181,229,0.1);
+            --shadow-sm: 0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04);
+            --shadow: 0 4px 16px rgba(15,23,42,0.08), 0 1px 3px rgba(15,23,42,0.04);
+            --shadow-md: 0 8px 30px rgba(15,23,42,0.1);
+            --shadow-blue: 0 4px 20px rgba(56,189,248,0.25), 0 1px 4px rgba(56,189,248,0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,19 +57,19 @@
         /* ==================== ANIMATED BACKGROUND ==================== */
         .bg-canvas {
             position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
-            background: linear-gradient(135deg, #F0F8FF 0%, #E8F4FB 40%, #EFF9FE 100%);
+            background: linear-gradient(160deg, #EFF8FF 0%, #DBEAFE 35%, #E0F2FE 65%, #F0F9FF 100%);
         }
 
         /* Floating orbs */
         .orb {
             position: absolute; border-radius: 50%;
-            filter: blur(60px); animation: orbFloat linear infinite;
+            filter: blur(70px); animation: orbFloat linear infinite;
             will-change: transform;
         }
-        .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(50,181,229,0.18) 0%, transparent 70%); top: -200px; right: -150px; animation-duration: 22s; }
-        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(95,201,237,0.14) 0%, transparent 70%); bottom: -100px; left: -100px; animation-duration: 30s; animation-direction: reverse; }
-        .orb-3 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(50,181,229,0.1) 0%, transparent 70%); top: 40%; left: 30%; animation-duration: 18s; animation-delay: -8s; }
-        .orb-4 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(26,123,163,0.12) 0%, transparent 70%); top: 20%; right: 20%; animation-duration: 14s; animation-delay: -4s; }
+        .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(2,132,199,0.15) 0%, transparent 70%); top: -200px; right: -150px; animation-duration: 22s; }
+        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%); bottom: -100px; left: -100px; animation-duration: 30s; animation-direction: reverse; }
+        .orb-3 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(30,64,175,0.08) 0%, transparent 70%); top: 40%; left: 30%; animation-duration: 18s; animation-delay: -8s; }
+        .orb-4 { width: 200px; height: 200px; background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%); top: 20%; right: 20%; animation-duration: 14s; animation-delay: -4s; }
 
         @keyframes orbFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -84,8 +87,8 @@
         /* Dot grid */
         .dot-grid {
             position: fixed; inset: 0; pointer-events: none; z-index: 0;
-            background-image: radial-gradient(circle, rgba(50,181,229,0.5) 0.8px, transparent 0.8px);
-            background-size: 32px 32px; opacity: 0.18;
+            background-image: radial-gradient(circle, rgba(2,132,199,0.4) 0.8px, transparent 0.8px);
+            background-size: 32px 32px; opacity: 0.15;
             animation: gridShift 40s linear infinite;
         }
         @keyframes gridShift { 0% { background-position: 0 0; } 100% { background-position: 32px 32px; } }
@@ -94,7 +97,7 @@
         .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
         .particle {
             position: absolute; border-radius: 50%;
-            background: var(--ob-blue); opacity: 0;
+            background: #38BDF8; opacity: 0;
             animation: particleRise linear infinite;
         }
         @keyframes particleRise {
@@ -107,11 +110,11 @@
         /* ==================== HEADER ==================== */
         header {
             position: sticky; top: 0; z-index: 100;
-            background: rgba(255, 255, 255, 0.75);
+            background: #0F172A;
             backdrop-filter: blur(24px) saturate(1.6);
-            border-bottom: 1px solid rgba(50,181,229,0.15);
+            border-bottom: 1px solid rgba(56,189,248,0.2);
             padding: 0 2rem;
-            box-shadow: 0 4px 32px rgba(50,181,229,0.08);
+            box-shadow: 0 4px 32px rgba(15,23,42,0.4), 0 1px 0 rgba(56,189,248,0.1);
             animation: slideDown 0.6s cubic-bezier(0.22,1,0.36,1);
         }
         @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -135,43 +138,39 @@
         .logo:hover .logo-img-wrap::before { opacity: 1; }
         .logo img {
             height: 40px; width: auto; object-fit: contain;
-            filter: drop-shadow(0 2px 12px rgba(50,181,229,0.25));
+            filter: brightness(0) invert(1) drop-shadow(0 2px 12px rgba(56,189,248,0.4));
             transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1);
         }
         .logo:hover img {
-            filter: drop-shadow(0 4px 20px rgba(50,181,229,0.5));
+            filter: brightness(0) invert(1) drop-shadow(0 4px 20px rgba(56,189,248,0.7));
             transform: scale(1.04);
         }
 
-        
-            100% { opacity: 0; transform: translate(-50%,-50%) scale(1.8); }
-        }
-
-        .logo-divider { width: 1px; height: 30px; background: linear-gradient(to bottom, transparent, rgba(50,181,229,0.3), transparent); }
+        .logo-divider { width: 1px; height: 30px; background: linear-gradient(to bottom, transparent, rgba(56,189,248,0.4), transparent); }
         .logo-text-wrap { display: flex; flex-direction: column; gap: 1px; }
-        .logo-subtitle { font-size: 0.78rem; font-weight: 700; color: var(--ob-blue); letter-spacing: 0.04em; }
-        .logo-tagline { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.02em; }
+        .logo-subtitle { font-size: 0.78rem; font-weight: 700; color: #38BDF8; letter-spacing: 0.04em; }
+        .logo-tagline { font-size: 0.65rem; color: rgba(148,163,184,0.9); font-weight: 500; letter-spacing: 0.02em; }
 
         /* Nav tabs — animated pill */
         .nav-tabs {
-            display: flex; gap: 4px; background: rgba(240,248,255,0.9);
-            border-radius: 14px; padding: 5px; border: 1px solid var(--border);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.04), 0 2px 8px rgba(50,181,229,0.06);
+            display: flex; gap: 4px; background: rgba(255,255,255,0.07);
+            border-radius: 14px; padding: 5px; border: 1px solid rgba(56,189,248,0.2);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 2px 8px rgba(56,189,248,0.06);
             position: relative;
         }
         .nav-tab {
             padding: 10px 24px; font-size: 0.83rem; font-weight: 700;
-            border-radius: 10px; cursor: pointer; color: var(--text-secondary);
+            border-radius: 10px; cursor: pointer; color: rgba(148,163,184,0.9);
             transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             border: none; background: none; font-family: var(--font); white-space: nowrap;
             position: relative; z-index: 1;
         }
-        .nav-tab:hover { color: var(--ob-blue); }
+        .nav-tab:hover { color: #38BDF8; }
         .nav-tab.active { color: white; }
         .nav-tab.active::before {
             content: ''; position: absolute; inset: 0; border-radius: 10px;
-            background: linear-gradient(135deg, var(--ob-blue) 0%, var(--ob-blue-dark) 100%);
-            box-shadow: 0 4px 16px rgba(50,181,229,0.4), 0 1px 4px rgba(50,181,229,0.2);
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            box-shadow: 0 4px 16px rgba(56,189,248,0.4), 0 1px 4px rgba(56,189,248,0.2);
             z-index: -1; animation: tabIn 0.35s cubic-bezier(0.22,1,0.36,1);
         }
         @keyframes tabIn { from { transform: scale(0.9); opacity: 0.5; } to { transform: scale(1); opacity: 1; } }
@@ -179,8 +178,8 @@
         /* Status bar below header */
         .status-bar {
             position: relative; z-index: 99;
-            background: linear-gradient(90deg, var(--ob-blue), var(--ob-blue-light), var(--ob-blue));
-            background-size: 200% 100%;
+            background: linear-gradient(90deg, #0369A1, #38BDF8, #7DD3FC, #38BDF8, #0369A1);
+            background-size: 300% 100%;
             animation: statusShimmer 4s linear infinite;
             height: 3px;
         }
@@ -189,15 +188,15 @@
         /* ==================== HERO BANNER ==================== */
         .hero-banner {
             position: relative; z-index: 1;
-            background: linear-gradient(135deg, rgba(50,181,229,0.08) 0%, rgba(255,255,255,0.6) 50%, rgba(95,201,237,0.06) 100%);
-            border-bottom: 1px solid rgba(50,181,229,0.12);
+            background: linear-gradient(160deg, #0F172A 0%, #1E3A5F 50%, #0C4A6E 100%);
+            border-bottom: 1px solid rgba(56,189,248,0.15);
             padding: 2.5rem 2rem 2rem;
             overflow: hidden;
             margin-bottom: 0;
         }
         .hero-banner::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(50,181,229,0.04) 50%, transparent 100%);
+            background: radial-gradient(ellipse at 70% 50%, rgba(56,189,248,0.12) 0%, transparent 60%);
             animation: heroPulse 5s ease-in-out infinite;
         }
         @keyframes heroPulse {
@@ -211,16 +210,16 @@
         }
         .hero-text h1 {
             font-size: 2.4rem; font-weight: 800; letter-spacing: -0.05em;
-            color: var(--ob-charcoal); line-height: 1.1; margin-bottom: 0.5rem;
+            color: #FFFFFF; line-height: 1.1; margin-bottom: 0.5rem;
         }
-        .hero-text h1 .word-audio { color: var(--ob-blue); position: relative; display: inline-block; }
+        .hero-text h1 .word-audio { color: #38BDF8; position: relative; display: inline-block; }
         .hero-text h1 .word-audio::after {
             content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--ob-blue), var(--ob-blue-light));
+            background: linear-gradient(90deg, #38BDF8, #7DD3FC);
             border-radius: 2px; animation: underlineGrow 1.5s cubic-bezier(0.22,1,0.36,1) both;
         }
         @keyframes underlineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        .hero-text p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; max-width: 440px; }
+        .hero-text p { color: rgba(186,230,253,0.85); font-size: 0.92rem; line-height: 1.6; max-width: 440px; }
 
         /* Waveform animation in hero */
         .hero-wave {
@@ -228,7 +227,7 @@
         }
         .wave-bar {
             width: 4px; border-radius: 2px;
-            background: linear-gradient(to top, var(--ob-blue-dark), var(--ob-blue-light));
+            background: linear-gradient(to top, #38BDF8, #7DD3FC);
             animation: waveAnim ease-in-out infinite;
         }
         @keyframes waveAnim {
@@ -241,11 +240,11 @@
         .hero-tag {
             display: inline-flex; align-items: center; gap: 5px;
             padding: 5px 12px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;
-            background: rgba(255,255,255,0.9); border: 1px solid var(--border);
-            color: var(--text-secondary); animation: tagFloat ease-in-out infinite;
-            box-shadow: 0 2px 8px rgba(50,181,229,0.08);
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(56,189,248,0.3);
+            color: #BAE6FD; animation: tagFloat ease-in-out infinite;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-        .hero-tag .tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ob-blue); }
+        .hero-tag .tag-dot { width: 6px; height: 6px; border-radius: 50%; background: #38BDF8; }
         @keyframes tagFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-3px); }
@@ -289,7 +288,7 @@
         }
         .step.done .step-num { background: var(--success); border-color: var(--success); color: white; animation: none; }
         .step-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; transition: color 0.3s; letter-spacing: 0.02em; }
-        .step.active .step-label { color: var(--ob-blue-dark); }
+        .step.active .step-label { color: #0284C7; }
         .step.done .step-label { color: var(--success); }
         .step-line { flex: 1; height: 3px; background: var(--border); margin: 0 14px; border-radius: 2px; position: relative; overflow: hidden; }
         .step-line::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: linear-gradient(90deg, var(--success), #34D399); border-radius: 2px; transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -316,9 +315,9 @@
         .card-label {
             display: inline-flex; align-items: center; gap: 8px;
             font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--ob-blue); margin-bottom: 1.25rem;
-            padding: 5px 14px; background: linear-gradient(135deg, var(--ob-blue-pale), rgba(50,181,229,0.05));
-            border-radius: 999px; border: 1px solid rgba(50,181,229,0.2);
+            color: #0284C7; margin-bottom: 1.25rem;
+            padding: 5px 14px; background: linear-gradient(135deg, #E0F2FE, rgba(56,189,248,0.08));
+            border-radius: 999px; border: 1px solid rgba(56,189,248,0.25);
         }
         .card-label .dot {
             width: 7px; height: 7px; background: var(--ob-blue);
@@ -457,25 +456,25 @@
 
         .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
         .btn-primary {
-            background: linear-gradient(135deg, var(--ob-blue) 0%, var(--ob-blue-dark) 100%);
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
             color: white;
-            box-shadow: 0 4px 20px rgba(50,181,229,0.3), 0 1px 4px rgba(50,181,229,0.2);
+            box-shadow: 0 4px 20px rgba(2,132,199,0.35), 0 1px 4px rgba(2,132,199,0.2);
         }
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 10px 40px rgba(50,181,229,0.45), 0 4px 12px rgba(50,181,229,0.25);
+            box-shadow: 0 10px 40px rgba(2,132,199,0.5), 0 4px 12px rgba(2,132,199,0.3);
         }
         .btn-primary:active { transform: translateY(-1px); }
         .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none; }
         .btn-secondary { background: var(--surface); color: var(--text); border: 1.5px solid var(--border); box-shadow: var(--shadow-sm); }
-        .btn-secondary:hover { border-color: var(--ob-blue); color: var(--ob-blue); background: var(--ob-blue-pale); transform: translateY(-2px); }
+        .btn-secondary:hover { border-color: #38BDF8; color: #0284C7; background: #E0F2FE; transform: translateY(-2px); }
         .btn-success { background: linear-gradient(135deg, var(--success), #059669); color: white; box-shadow: 0 4px 20px rgba(16,185,129,0.25); }
         .btn-success:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(16,185,129,0.35); }
         .btn-full { width: 100%; justify-content: center; }
 
         /* Animated CTA button */
         .btn-primary.btn-full {
-            background: linear-gradient(135deg, #32B5E5 0%, #2196C7 50%, #1A7BA3 100%);
+            background: linear-gradient(135deg, #38BDF8 0%, #0284C7 40%, #0369A1 70%, #1E40AF 100%);
             background-size: 200% 200%;
             animation: btnGradient 4s ease infinite;
         }
@@ -578,15 +577,143 @@
         .badge-success { background: var(--success-light); color: #065F46; border: 1px solid rgba(16,185,129,0.2); }
 
         /* ==================== FOOTER ==================== */
+        /* ==================== TOKEN ANALYTICS WIDGET ==================== */
+        .token-widget {
+            position: fixed; bottom: 24px; right: 24px; z-index: 200;
+            width: 300px;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid rgba(56,189,248,0.25);
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(15,23,42,0.2), 0 2px 8px rgba(56,189,248,0.1);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+            animation: widgetSlideIn 0.6s 0.5s cubic-bezier(0.22,1,0.36,1) both;
+        }
+        @keyframes widgetSlideIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to   { opacity: 1; transform: translateY(0)   scale(1); }
+        }
+        .token-widget.collapsed .token-body { display: none; }
+        .token-widget.collapsed { width: 220px; }
+
+        .token-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #0F172A, #1E3A5F);
+            border-bottom: 1px solid rgba(56,189,248,0.15);
+            cursor: pointer; user-select: none;
+        }
+        .token-header-left { display: flex; align-items: center; gap: 8px; }
+        .token-header-icon {
+            width: 28px; height: 28px; border-radius: 8px;
+            background: linear-gradient(135deg, #0284C7, #0369A1);
+            display: grid; place-items: center; flex-shrink: 0;
+        }
+        .token-header-icon svg { width: 14px; height: 14px; color: white; }
+        .token-header-title { font-size: 0.78rem; font-weight: 800; color: #F0F9FF; letter-spacing: 0.01em; }
+        .token-header-sub { font-size: 0.64rem; color: #7DD3FC; font-weight: 500; }
+        .token-collapse-btn {
+            background: none; border: none; cursor: pointer; padding: 4px;
+            color: #7DD3FC; border-radius: 6px; transition: all 0.2s;
+            display: grid; place-items: center;
+        }
+        .token-collapse-btn:hover { background: rgba(56,189,248,0.15); color: #38BDF8; }
+        .token-collapse-btn svg { width: 14px; height: 14px; transition: transform 0.3s; }
+        .token-widget.collapsed .token-collapse-btn svg { transform: rotate(180deg); }
+
+        .token-body { padding: 14px 16px; }
+
+        /* Total counter */
+        .token-total {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 12px; border-radius: 12px;
+            background: linear-gradient(135deg, #EFF8FF, rgba(56,189,248,0.06));
+            border: 1px solid rgba(56,189,248,0.2); margin-bottom: 12px;
+        }
+        .token-total-label { font-size: 0.7rem; font-weight: 700; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .token-total-value { font-size: 1.1rem; font-weight: 800; color: #0284C7; font-family: var(--font-mono); }
+        .token-total-value .unit { font-size: 0.65rem; color: var(--text-muted); font-weight: 600; margin-left: 2px; }
+
+        /* Phase rows */
+        .token-phase { margin-bottom: 10px; }
+        .token-phase-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .token-phase-name {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 0.72rem; font-weight: 700; color: #1E40AF;
+        }
+        .token-phase-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+        }
+        .phase-transcribe .token-phase-dot { background: #0284C7; }
+        .phase-timeline .token-phase-dot { background: #1E40AF; }
+
+        .token-phase-count {
+            font-size: 0.72rem; font-weight: 800; font-family: var(--font-mono);
+        }
+        .phase-transcribe .token-phase-count { color: #0284C7; }
+        .phase-timeline .token-phase-count { color: #1E40AF; }
+
+        .token-bar-track {
+            height: 5px; background: var(--border); border-radius: 3px; overflow: hidden;
+        }
+        .token-bar-fill {
+            height: 100%; border-radius: 3px; width: 0%;
+            transition: width 1s cubic-bezier(0.22,1,0.36,1);
+        }
+        .phase-transcribe .token-bar-fill { background: linear-gradient(90deg, #0284C7, #38BDF8); }
+        .phase-timeline .token-bar-fill { background: linear-gradient(90deg, #1E40AF, #60A5FA); }
+
+        /* Breakdown rows */
+        .token-breakdown {
+            margin-top: 4px; display: flex; gap: 6px;
+        }
+        .token-breakdown-item {
+            flex: 1; padding: 6px 8px; border-radius: 8px; background: var(--bg);
+            border: 1px solid var(--border); text-align: center;
+        }
+        .token-breakdown-item .tbi-val {
+            font-size: 0.72rem; font-weight: 800; color: var(--ob-charcoal);
+            font-family: var(--font-mono); display: block;
+        }
+        .token-breakdown-item .tbi-label {
+            font-size: 0.6rem; color: var(--text-muted); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        .token-divider { height: 1px; background: var(--border); margin: 10px 0; }
+
+        .token-empty {
+            text-align: center; padding: 8px 0;
+            font-size: 0.72rem; color: var(--text-muted); font-style: italic;
+        }
+        .token-empty svg { width: 18px; height: 18px; color: var(--border-hover); margin-bottom: 4px; display: block; margin-left: auto; margin-right: auto; }
+
+        .token-live-dot {
+            width: 7px; height: 7px; border-radius: 50%; background: var(--success);
+            animation: livePulse 1.5s ease-in-out infinite;
+        }
+        @keyframes livePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+            50% { box-shadow: 0 0 0 4px rgba(16,185,129,0); }
+        }
+
+        @media (max-width: 640px) {
+            .token-widget { bottom: 12px; right: 12px; width: 260px; }
+        }
+
         footer {
             position: relative; z-index: 1; text-align: center; padding: 2.5rem 2rem;
             color: var(--text-muted); font-size: 0.78rem;
-            border-top: 1px solid rgba(50,181,229,0.12);
-            background: linear-gradient(to bottom, transparent, rgba(50,181,229,0.03));
+            border-top: 1px solid rgba(56,189,248,0.15);
+            background: linear-gradient(to bottom, transparent, rgba(15,23,42,0.03));
         }
-        footer a { color: var(--ob-blue); text-decoration: none; font-weight: 700; }
+        footer a { color: #0284C7; text-decoration: none; font-weight: 700; }
         footer a:hover { text-decoration: underline; }
-        .footer-wave { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--ob-blue), var(--ob-blue-light), var(--ob-blue), transparent); }
+        .footer-wave { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #0284C7, #38BDF8, #0284C7, transparent); }
 
         /* ==================== MEDIA QUERIES ==================== */
         @media (max-width: 640px) {
@@ -600,6 +727,358 @@
             .nav-tab { flex: 1; text-align: center; padding: 10px 12px; }
             .hero-banner { padding: 1.5rem 1rem 1.2rem; }
             .hero-wave { display: none; }
+        }
+
+        /* ==================== PHASE BADGES ==================== */
+        .phase-badge {
+            display: flex; align-items: center; gap: 14px;
+            padding: 14px 20px; border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem; position: relative; overflow: hidden;
+            animation: fadeSlideUp 0.5s cubic-bezier(0.22,1,0.36,1) both;
+        }
+        .phase-badge-1 {
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%);
+            border: 1px solid rgba(56,189,248,0.25);
+            box-shadow: 0 4px 24px rgba(15,23,42,0.25), inset 0 1px 0 rgba(56,189,248,0.1);
+        }
+        .phase-badge-2 {
+            background: linear-gradient(135deg, #0F172A 0%, #1E2D5A 100%);
+            border: 1px solid rgba(96,165,250,0.25);
+            box-shadow: 0 4px 24px rgba(15,23,42,0.25), inset 0 1px 0 rgba(96,165,250,0.1);
+        }
+        .phase-badge-icon {
+            width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+            display: grid; place-items: center;
+            background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(56,189,248,0.05));
+            border: 1px solid rgba(56,189,248,0.25);
+        }
+        .phase-badge-2 .phase-badge-icon {
+            background: linear-gradient(135deg, rgba(96,165,250,0.2), rgba(96,165,250,0.05));
+            border-color: rgba(96,165,250,0.25);
+        }
+        .phase-badge-icon svg { width: 20px; height: 20px; color: #38BDF8; }
+        .phase-badge-2 .phase-badge-icon svg { color: #60A5FA; }
+        .phase-badge-text { display: flex; flex-direction: column; gap: 2px; }
+        .phase-badge-label {
+            font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em;
+            color: #38BDF8;
+        }
+        .phase-badge-2 .phase-badge-label { color: #60A5FA; }
+        .phase-badge-title { font-size: 0.95rem; font-weight: 800; color: #F0F9FF; letter-spacing: -0.01em; }
+        .phase-badge-glow {
+            position: absolute; right: -20px; top: -20px;
+            width: 120px; height: 120px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
+            animation: phaseBadgeGlow 3s ease-in-out infinite;
+        }
+        .phase-badge-2 .phase-badge-glow { background: radial-gradient(circle, rgba(96,165,250,0.12) 0%, transparent 70%); }
+        @keyframes phaseBadgeGlow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        /* ==================== UPLOAD SCANLINE ==================== */
+        .upload-scanline {
+            position: absolute; left: 0; right: 0; height: 2px; top: 0;
+            background: linear-gradient(90deg, transparent, #38BDF8, transparent);
+            animation: scanline 3s ease-in-out infinite;
+            opacity: 0.5; pointer-events: none; z-index: 2;
+        }
+        @keyframes scanline {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* ==================== UPLOAD MINI WAVE ==================== */
+        .upload-mini-wave {
+            display: flex; align-items: center; justify-content: center;
+            gap: 2px; height: 20px; margin: 0.6rem auto 0;
+        }
+        .upload-mini-wave-bar {
+            width: 3px; border-radius: 2px;
+            background: linear-gradient(to top, #0284C7, #38BDF8);
+            animation: miniWave ease-in-out infinite;
+        }
+        @keyframes miniWave {
+            0%, 100% { transform: scaleY(0.25); opacity: 0.4; }
+            50% { transform: scaleY(1); opacity: 0.8; }
+        }
+
+        /* ==================== PROCESSING PANEL ==================== */
+        .processing-panel {
+            background: #FFFFFF; border: 1px solid var(--border);
+            border-radius: var(--radius-xl); padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-md);
+            animation: fadeSlideUp 0.4s ease both;
+        }
+        .processing-waveform {
+            display: flex; align-items: center; justify-content: center;
+            gap: 3px; height: 40px; margin-bottom: 1.25rem;
+        }
+        .pw-bar {
+            width: 4px; border-radius: 2px;
+            background: linear-gradient(to top, #0284C7, #38BDF8);
+            animation: procWave ease-in-out infinite;
+        }
+        @keyframes procWave {
+            0%, 100% { transform: scaleY(0.2); opacity: 0.5; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        .processing-steps {
+            display: flex; flex-direction: column; gap: 0; margin-bottom: 1.25rem;
+        }
+        .proc-step {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 14px; border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+            background: transparent;
+        }
+        .proc-step.active {
+            background: linear-gradient(135deg, #EFF8FF, rgba(56,189,248,0.05));
+            border: 1px solid rgba(56,189,248,0.2);
+        }
+        .proc-step.done {
+            background: linear-gradient(135deg, #F0FDF4, rgba(16,185,129,0.04));
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+        .proc-step-icon {
+            width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+            display: grid; place-items: center;
+            background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.15);
+            transition: all 0.4s;
+        }
+        .proc-step.active .proc-step-icon { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.35); }
+        .proc-step.done .proc-step-icon { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3); }
+        .proc-step-icon svg { width: 16px; height: 16px; color: var(--text-muted); transition: all 0.4s; }
+        .proc-step.active .proc-step-icon svg { color: #0284C7; }
+        .proc-step.done .proc-step-icon svg { color: var(--success); }
+        .proc-step-info { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+        .proc-step-name { font-size: 0.82rem; font-weight: 700; color: var(--text); }
+        .proc-step.active .proc-step-name { color: #0284C7; }
+        .proc-step.done .proc-step-name { color: var(--success); }
+        .proc-step-status { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); }
+        .proc-step.active .proc-step-status { color: #38BDF8; }
+        .proc-step.done .proc-step-status { color: var(--success); }
+        .proc-step-dot {
+            width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+            background: var(--border); transition: all 0.4s;
+        }
+        .proc-step.active .proc-step-dot {
+            background: #38BDF8;
+            box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+            animation: stepDotPulse 1.2s ease-in-out infinite;
+        }
+        @keyframes stepDotPulse {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(56,189,248,0.2); }
+            50% { box-shadow: 0 0 0 6px rgba(56,189,248,0.08); }
+        }
+        .proc-step.done .proc-step-dot { background: var(--success); box-shadow: none; }
+        .proc-connector {
+            width: 2px; height: 16px; background: var(--border);
+            margin-left: 30px; border-radius: 1px;
+            transition: background 0.4s;
+        }
+        .proc-connector.done { background: var(--success); }
+
+        /* ==================== RESULT STATS ROW ==================== */
+        .result-stats-row {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+            margin-bottom: 1rem; margin-top: 1.25rem;
+        }
+        @media (max-width: 640px) { .result-stats-row { grid-template-columns: repeat(2, 1fr); } }
+        .result-stat-card {
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 1rem 0.75rem;
+            text-align: center;
+            animation: statCardIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
+            animation-delay: var(--delay, 0s);
+            transition: all 0.3s ease;
+        }
+        .result-stat-card:hover { border-color: #38BDF8; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(56,189,248,0.12); }
+        @keyframes statCardIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .rsc-icon {
+            width: 32px; height: 32px; border-radius: 8px; margin: 0 auto 8px;
+            display: grid; place-items: center;
+            background: linear-gradient(135deg, #E0F2FE, #F0F9FF);
+            border: 1px solid rgba(56,189,248,0.2);
+        }
+        .rsc-icon svg { width: 14px; height: 14px; color: #0284C7; }
+        .rsc-num {
+            font-size: 1.1rem; font-weight: 800; color: #0F172A;
+            font-family: var(--font-mono); margin-bottom: 3px;
+            transition: all 0.3s;
+        }
+        .rsc-label { font-size: 0.63rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+        /* ==================== PIPELINE FLOW (Phase 2) ==================== */
+        .pipeline-flow {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0; margin-bottom: 1.5rem; flex-wrap: wrap;
+            padding: 1rem;
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            position: relative; overflow: hidden;
+        }
+        .pipeline-flow::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(56,189,248,0.03), transparent);
+            pointer-events: none;
+        }
+        .pipeline-node {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            transition: all 0.3s ease;
+        }
+        .pipeline-node-full { flex-direction: row; gap: 8px; }
+        .pipeline-node:hover { transform: translateY(-3px); }
+        .pn-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: grid; place-items: center;
+            background: linear-gradient(135deg, #EFF8FF, #E0F2FE);
+            border: 1.5px solid rgba(56,189,248,0.3);
+            box-shadow: 0 2px 12px rgba(56,189,248,0.1);
+            transition: all 0.3s ease;
+        }
+        .pn-json .pn-icon { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); border-color: rgba(16,185,129,0.3); }
+        .pn-doc .pn-icon { background: linear-gradient(135deg, #FFF7ED, #FED7AA); border-color: rgba(249,115,22,0.3); }
+        .pn-output .pn-icon { background: linear-gradient(135deg, #0F172A, #1E3A5F); border-color: rgba(56,189,248,0.4); }
+        .pn-output .pn-icon svg { color: #38BDF8 !important; }
+        .pn-icon svg { width: 20px; height: 20px; color: #0284C7; }
+        .pn-json .pn-icon svg { color: #059669; }
+        .pn-doc .pn-icon svg { color: #EA580C; }
+        .pipeline-node span { font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.04em; }
+        .pipeline-node-full span { font-size: 0.8rem; color: #0F172A; font-weight: 800; }
+
+        .pipeline-arrow {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 4px; padding: 0 8px;
+        }
+        .pipeline-arrow-label {
+            font-size: 0.6rem; font-weight: 700; color: #38BDF8;
+            text-transform: uppercase; letter-spacing: 0.08em;
+        }
+        .pipeline-arrow-down {
+            flex-direction: column; align-items: center;
+            width: 100%; justify-content: center; padding: 4px 0;
+            display: none; /* shown on mobile */
+        }
+        .pipeline-dash {
+            stroke-dashoffset: 0;
+            animation: dashFlow 1.5s linear infinite;
+        }
+        @keyframes dashFlow {
+            to { stroke-dashoffset: -14; }
+        }
+        @media (max-width: 500px) {
+            .pipeline-flow { flex-direction: column; }
+            .pipeline-arrow-down { display: flex; }
+        }
+
+        /* ==================== TIMELINE GEN PANEL ==================== */
+        .timeline-gen-panel {
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius-xl); padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-md);
+            animation: fadeSlideUp 0.4s ease both;
+        }
+        .tg-header {
+            display: flex; align-items: center; gap: 16px; margin-bottom: 1.25rem;
+        }
+        .tg-spinner-wrap {
+            position: relative; width: 52px; height: 52px; flex-shrink: 0;
+            display: grid; place-items: center;
+        }
+        .tg-orbit-ring {
+            position: absolute; inset: 0; border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #38BDF8; border-right-color: rgba(56,189,248,0.3);
+            animation: orbitSpin 1.4s linear infinite;
+        }
+        .tg-orbit-ring-2 {
+            inset: 6px;
+            border-top-color: #60A5FA; border-right-color: rgba(96,165,250,0.3);
+            animation-duration: 1s; animation-direction: reverse;
+        }
+        @keyframes orbitSpin { to { transform: rotate(360deg); } }
+        .tg-center-icon {
+            width: 22px; height: 22px; color: #0284C7; position: relative; z-index: 1;
+        }
+        .tg-title { font-size: 0.9rem; font-weight: 800; color: #0F172A; margin-bottom: 3px; }
+        .tg-subtitle {
+            font-size: 0.75rem; color: #38BDF8; font-family: var(--font-mono);
+            animation: subtitleCycle 0.4s ease;
+        }
+        @keyframes subtitleCycle {
+            from { opacity: 0; transform: translateX(-6px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Animated fake timeline tracks */
+        .tg-timeline-preview {
+            background: #F8FAFC; border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 10px 12px;
+            display: flex; flex-direction: column; gap: 6px;
+            overflow: hidden; position: relative;
+        }
+        .tg-timeline-preview::before {
+            content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+            background: linear-gradient(to bottom, #38BDF8, #60A5FA, #38BDF8);
+            animation: trackHeadSweep 2s ease-in-out infinite;
+        }
+        @keyframes trackHeadSweep {
+            0% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(800px); opacity: 0.5; }
+        }
+        .tg-track-label { font-size: 0.6rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; padding-left: 4px; }
+        .tg-track {
+            height: 18px; display: flex; gap: 3px; align-items: center;
+        }
+        .tg-clip {
+            height: 100%; border-radius: 3px;
+            animation: clipAppear 0.3s cubic-bezier(0.22,1,0.36,1) both;
+            position: relative; overflow: hidden; flex-shrink: 0;
+        }
+        .tg-clip::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            animation: clipShimmer 2s ease infinite;
+        }
+        @keyframes clipShimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+        @keyframes clipAppear {
+            from { transform: scaleX(0); transform-origin: left; opacity: 0; }
+            to { transform: scaleX(1); opacity: 1; }
+        }
+        .tg-clip-title { background: linear-gradient(90deg, #0284C7, #38BDF8); }
+        .tg-clip-para { background: linear-gradient(90deg, #1E40AF, #60A5FA); }
+        .tg-clip-effect { background: linear-gradient(90deg, #0369A1, #7DD3FC); }
+        .tg-clip-option { background: linear-gradient(90deg, #059669, #34D399); }
+        .tg-clip-question { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+
+        /* ==================== BTN EXTRAS ==================== */
+        .btn-pulse:not(:disabled) { animation: btnGradient 4s ease infinite, btnSoftPulse 2.5s ease-in-out infinite; }
+        @keyframes btnSoftPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(16,185,129,0.25); }
+            50% { box-shadow: 0 4px 30px rgba(16,185,129,0.45), 0 0 0 4px rgba(16,185,129,0.08); }
+        }
+        .btn-badge-live {
+            margin-left: auto; display: flex; align-items: center; gap: 5px;
+            font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+            background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 999px;
+        }
+        .live-dot { width: 5px; height: 5px; border-radius: 50%; background: #ffffff; animation: livePulse 1.2s ease-in-out infinite; }
+
+        /* ==================== FIC DROP HINT ==================== */
+        .fic-drop-hint {
+            font-size: 0.68rem; color: var(--text-muted); margin-top: 4px;
+            opacity: 0.7; font-style: italic;
         }
     </style>
 </head>
@@ -657,6 +1136,18 @@
     <main>
         <!-- TAB 1: TRANSCRIBE -->
         <div class="section active" id="section-transcribe">
+            <!-- Phase Badge -->
+            <div class="phase-badge phase-badge-1">
+                <div class="phase-badge-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                </div>
+                <div class="phase-badge-text">
+                    <span class="phase-badge-label">Phase 1</span>
+                    <span class="phase-badge-title">Audio Transcription</span>
+                </div>
+                <div class="phase-badge-glow"></div>
+            </div>
+
             <div class="steps">
                 <div class="step active" id="step-1"><div class="step-num">1</div><span class="step-label">Upload</span></div>
                 <div class="step-line" id="line-1"></div>
@@ -670,6 +1161,8 @@
             <div class="card" id="upload-card">
                 <div class="card-label"><span class="dot"></span> Audio Files</div>
                 <div class="upload-zone" id="upload-zone" onclick="document.getElementById('audio-input').click()">
+                    <!-- Animated scan lines -->
+                    <div class="upload-scanline"></div>
                     <div class="upload-icon">
                         <div class="upload-icon-ring"></div>
                         <div class="upload-icon-ring-2"></div>
@@ -681,6 +1174,8 @@
                     </div>
                     <h3>Drop audio files here</h3>
                     <p>or click to browse your files</p>
+                    <!-- Mini waveform preview -->
+                    <div class="upload-mini-wave" id="upload-mini-wave"></div>
                     <div class="format-chips">
                         <span class="format-chip">MP3</span>
                         <span class="format-chip">WAV</span>
@@ -703,12 +1198,74 @@
                 Merge &amp; Transcribe
             </button>
 
+            <!-- Processing Animation Panel -->
             <div id="process-status" style="display:none;">
-                <div class="progress-bar"><div class="progress-fill indeterminate" id="process-progress"></div></div>
-                <div class="status-msg info" id="process-msg"><div class="spinner"></div><span>Processing audio files…</span></div>
+                <div class="processing-panel">
+                    <div class="processing-waveform" id="processing-waveform"></div>
+                    <div class="processing-steps">
+                        <div class="proc-step" id="proc-step-1">
+                            <div class="proc-step-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            </div>
+                            <div class="proc-step-info">
+                                <span class="proc-step-name">Merging Audio</span>
+                                <span class="proc-step-status">Waiting…</span>
+                            </div>
+                            <div class="proc-step-dot"></div>
+                        </div>
+                        <div class="proc-connector"></div>
+                        <div class="proc-step" id="proc-step-2">
+                            <div class="proc-step-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div class="proc-step-info">
+                                <span class="proc-step-name">Uploading to Gemini</span>
+                                <span class="proc-step-status">Waiting…</span>
+                            </div>
+                            <div class="proc-step-dot"></div>
+                        </div>
+                        <div class="proc-connector"></div>
+                        <div class="proc-step" id="proc-step-3">
+                            <div class="proc-step-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            </div>
+                            <div class="proc-step-info">
+                                <span class="proc-step-name">Transcribing Words</span>
+                                <span class="proc-step-status">Waiting…</span>
+                            </div>
+                            <div class="proc-step-dot"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill indeterminate" id="process-progress"></div></div>
+                    <div class="status-msg info" id="process-msg"><div class="spinner"></div><span>Processing audio files…</span></div>
+                </div>
             </div>
 
             <div id="transcribe-result" style="display:none;">
+                <!-- Result Stats Row -->
+                <div class="result-stats-row" id="result-stats-row">
+                    <div class="result-stat-card" style="--delay:0s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+                        <div class="rsc-num" id="stat-words">—</div>
+                        <div class="rsc-label">Words</div>
+                    </div>
+                    <div class="result-stat-card" style="--delay:0.08s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                        <div class="rsc-num" id="stat-duration">—</div>
+                        <div class="rsc-label">Duration</div>
+                    </div>
+                    <div class="result-stat-card" style="--delay:0.16s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                        <div class="rsc-num" id="stat-model">—</div>
+                        <div class="rsc-label">Model</div>
+                    </div>
+                    <div class="result-stat-card" style="--delay:0.24s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+                        <div class="rsc-num" id="stat-tokens">—</div>
+                        <div class="rsc-label">Tokens</div>
+                    </div>
+                </div>
+
                 <div class="result-panel">
                     <div class="result-header">
                         <span>📄 Transcription Output</span>
@@ -724,7 +1281,10 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                             Merged Audio
                         </button>
-                        <button class="btn btn-success" onclick="useInTimeline()">Use in Timeline →</button>
+                        <button class="btn btn-success" onclick="useInTimeline()">
+                            Use in Timeline
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -732,12 +1292,48 @@
 
         <!-- TAB 2: TIMELINE PLANNER -->
         <div class="section" id="section-timeline">
+            <!-- Phase Badge -->
+            <div class="phase-badge phase-badge-2">
+                <div class="phase-badge-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16 2 12 7 8 2"/></svg>
+                </div>
+                <div class="phase-badge-text">
+                    <span class="phase-badge-label">Phase 2</span>
+                    <span class="phase-badge-title">DaVinci Timeline Planner</span>
+                </div>
+                <div class="phase-badge-glow"></div>
+            </div>
+
+            <!-- Animated pipeline flow -->
+            <div class="pipeline-flow">
+                <div class="pipeline-node pn-json">
+                    <div class="pn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                    <span>JSON</span>
+                </div>
+                <div class="pipeline-arrow">
+                    <svg viewBox="0 0 60 12" fill="none"><path d="M0 6 Q15 6 30 6" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 3" class="pipeline-dash"/><path d="M30 6 Q45 6 58 6" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 3" class="pipeline-dash" style="animation-delay:0.3s"/><polyline points="52,2 60,6 52,10" fill="none" stroke="#38BDF8" stroke-width="2"/></svg>
+                    <span class="pipeline-arrow-label">Gemini AI</span>
+                </div>
+                <div class="pipeline-node pn-doc">
+                    <div class="pn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                    <span>Slides</span>
+                </div>
+                <div class="pipeline-arrow pipeline-arrow-down">
+                    <svg viewBox="0 0 12 40" fill="none"><path d="M6 0 Q6 10 6 20" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 3" class="pipeline-dash"/><path d="M6 20 Q6 30 6 38" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 3" class="pipeline-dash" style="animation-delay:0.3s"/><polyline points="2,32 6,40 10,32" fill="none" stroke="#38BDF8" stroke-width="2"/></svg>
+                </div>
+                <div class="pipeline-node pn-output pipeline-node-full">
+                    <div class="pn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16 2 12 7 8 2"/></svg></div>
+                    <span>master_plan.json</span>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-label"><span class="dot"></span> Inputs</div>
                 <div id="current-transcription-notice" style="display:none; margin-bottom: 1rem;">
-                    <button class="btn btn-success btn-full" onclick="useCurrentTranscription()" id="use-current-btn">
+                    <button class="btn btn-success btn-full btn-pulse" onclick="useCurrentTranscription()" id="use-current-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                         Use current transcription result
+                        <span class="btn-badge-live"><span class="live-dot"></span>Ready</span>
                     </button>
                 </div>
                 <div class="input-row">
@@ -748,6 +1344,7 @@
                         </div>
                         <h4>Transcription JSON</h4>
                         <p>from /process/ output</p>
+                        <div class="fic-drop-hint">Drop file or click</div>
                         <div class="selected-file" id="json-name"></div>
                     </div>
                     <div class="file-input-card" id="doc-card" onclick="document.getElementById('doc-input').click()">
@@ -757,6 +1354,7 @@
                         </div>
                         <h4>Slide Script</h4>
                         <p>.pdf or .docx</p>
+                        <div class="fic-drop-hint">Drop file or click</div>
                         <div class="selected-file" id="doc-name"></div>
                     </div>
                 </div>
@@ -767,12 +1365,59 @@
                 Generate master_plan.json
             </button>
 
+            <!-- Timeline Generation Animation -->
             <div id="timeline-status" style="display:none;">
-                <div class="progress-bar"><div class="progress-fill indeterminate" id="timeline-progress"></div></div>
-                <div class="status-msg info" id="timeline-msg"><div class="spinner"></div><span>Generating timeline with Gemini…</span></div>
+                <div class="timeline-gen-panel">
+                    <div class="tg-header">
+                        <div class="tg-spinner-wrap">
+                            <div class="tg-orbit-ring"></div>
+                            <div class="tg-orbit-ring tg-orbit-ring-2"></div>
+                            <svg class="tg-center-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16 2 12 7 8 2"/></svg>
+                        </div>
+                        <div class="tg-header-text">
+                            <div class="tg-title">Gemini is building your timeline…</div>
+                            <div class="tg-subtitle" id="tg-current-task">Analyzing audio transcript</div>
+                        </div>
+                    </div>
+                    <!-- Animated clip blocks being "placed" -->
+                    <div class="tg-timeline-preview" id="tg-timeline-preview">
+                        <div class="tg-track-label">V2</div>
+                        <div class="tg-track" id="tg-track-v2"></div>
+                        <div class="tg-track-label">V3</div>
+                        <div class="tg-track" id="tg-track-v3"></div>
+                        <div class="tg-track-label">V4</div>
+                        <div class="tg-track" id="tg-track-v4"></div>
+                    </div>
+                    <div class="progress-bar" style="margin-top:0.75rem"><div class="progress-fill indeterminate" id="timeline-progress"></div></div>
+                    <div class="status-msg info" id="timeline-msg" style="margin-top:0.5rem"><div class="spinner"></div><span>Generating timeline with Gemini…</span></div>
+                </div>
             </div>
 
             <div id="timeline-result" style="display:none;">
+                <!-- Timeline result stats -->
+                <div class="result-stats-row">
+                    <div class="result-stat-card" style="--delay:0s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><polyline points="16 2 12 7 8 2"/></svg></div>
+                        <div class="rsc-num" id="stat-clips">—</div>
+                        <div class="rsc-label">Clips</div>
+                    </div>
+                    <div class="result-stat-card" style="--delay:0.08s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                        <div class="rsc-num" id="stat-tl-tokens">—</div>
+                        <div class="rsc-label">Tokens</div>
+                    </div>
+                    <div class="result-stat-card" style="--delay:0.16s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                        <div class="rsc-num" id="stat-tl-model">—</div>
+                        <div class="rsc-label">Model</div>
+                    </div>
+                    <div class="result-stat-card" style="--delay:0.24s">
+                        <div class="rsc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+                        <div class="rsc-num" id="stat-tl-status">✓</div>
+                        <div class="rsc-label">Complete</div>
+                    </div>
+                </div>
+
                 <div class="result-panel">
                     <div class="result-header">
                         <span>🎬 master_plan.json</span>
@@ -795,7 +1440,246 @@
         Built for <a href="#">Oliveboard</a> — Audio to DaVinci Resolve Timeline &nbsp;·&nbsp; Powered by <a href="#">Gemini AI</a>
     </footer>
 
+    <!-- ══════════════ TOKEN ANALYTICS WIDGET ══════════════ -->
+    <div class="token-widget" id="token-widget">
+        <div class="token-header" onclick="toggleTokenWidget()">
+            <div class="token-header-left">
+                <div class="token-header-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div>
+                    <div class="token-header-title">Token Usage</div>
+                    <div class="token-header-sub">Gemini API consumption</div>
+                </div>
+            </div>
+            <button class="token-collapse-btn" onclick="event.stopPropagation(); toggleTokenWidget()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            </button>
+        </div>
+
+        <div class="token-body" id="token-body">
+            <!-- Total -->
+            <div class="token-total">
+                <div>
+                    <div class="token-total-label">Total Tokens Used</div>
+                </div>
+                <div class="token-total-value" id="token-grand-total">
+                    — <span class="unit">tok</span>
+                </div>
+            </div>
+
+            <!-- Empty state -->
+            <div class="token-empty" id="token-empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+                Run a transcription or timeline<br>to see token usage
+            </div>
+
+            <!-- Phase 1: Transcribe -->
+            <div class="token-phase phase-transcribe" id="phase-transcribe" style="display:none;">
+                <div class="token-phase-header">
+                    <div class="token-phase-name">
+                        <span class="token-phase-dot"></span> Phase 1 — Transcribe
+                    </div>
+                    <span class="token-phase-count" id="transcribe-total-tokens">0</span>
+                </div>
+                <div class="token-bar-track">
+                    <div class="token-bar-fill" id="transcribe-bar"></div>
+                </div>
+                <div class="token-breakdown">
+                    <div class="token-breakdown-item">
+                        <span class="tbi-val" id="transcribe-input-tokens">—</span>
+                        <span class="tbi-label">Input</span>
+                    </div>
+                    <div class="token-breakdown-item">
+                        <span class="tbi-val" id="transcribe-output-tokens">—</span>
+                        <span class="tbi-label">Output</span>
+                    </div>
+                    <div class="token-breakdown-item">
+                        <span class="tbi-val" id="transcribe-model">—</span>
+                        <span class="tbi-label">Model</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="token-divider" id="token-divider" style="display:none;"></div>
+
+            <!-- Phase 2: Timeline -->
+            <div class="token-phase phase-timeline" id="phase-timeline" style="display:none;">
+                <div class="token-phase-header">
+                    <div class="token-phase-name">
+                        <span class="token-phase-dot"></span> Phase 2 — Timeline
+                    </div>
+                    <span class="token-phase-count" id="timeline-total-tokens">0</span>
+                </div>
+                <div class="token-bar-track">
+                    <div class="token-bar-fill" id="timeline-bar"></div>
+                </div>
+                <div class="token-breakdown">
+                    <div class="token-breakdown-item">
+                        <span class="tbi-val" id="timeline-input-tokens">—</span>
+                        <span class="tbi-label">Input</span>
+                    </div>
+                    <div class="token-breakdown-item">
+                        <span class="tbi-val" id="timeline-output-tokens">—</span>
+                        <span class="tbi-label">Output</span>
+                    </div>
+                    <div class="token-breakdown-item">
+                        <span class="tbi-val" id="timeline-model">—</span>
+                        <span class="tbi-label">Model</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ==================== MINI UPLOAD WAVE ====================
+        (function buildMiniWave() {
+            const el = document.getElementById('upload-mini-wave');
+            if (!el) return;
+            for (let i = 0; i < 20; i++) {
+                const b = document.createElement('div');
+                b.className = 'upload-mini-wave-bar';
+                const h = Math.random() * 14 + 4;
+                const dur = 0.5 + Math.random() * 1.2;
+                const delay = (i / 20) * -2;
+                b.style.cssText = `height:${h}px; animation-duration:${dur}s; animation-delay:${delay}s;`;
+                el.appendChild(b);
+            }
+        })();
+
+        // ==================== PROCESSING WAVEFORM ====================
+        function buildProcessingWave() {
+            const el = document.getElementById('processing-waveform');
+            if (!el || el.children.length > 0) return;
+            for (let i = 0; i < 32; i++) {
+                const b = document.createElement('div');
+                b.className = 'pw-bar';
+                const h = Math.random() * 28 + 8;
+                const dur = 0.4 + Math.random() * 1.0;
+                const delay = (i / 32) * -3;
+                b.style.cssText = `height:${h}px; animation-duration:${dur}s; animation-delay:${delay}s;`;
+                el.appendChild(b);
+            }
+        }
+
+        // ==================== PROCESSING STEP ANIMATION ====================
+        function setProcStep(stepNum, state, statusText) {
+            for (let i = 1; i <= 3; i++) {
+                const el = document.getElementById(`proc-step-${i}`);
+                if (!el) continue;
+                el.classList.remove('active', 'done');
+            }
+            if (stepNum > 1) {
+                const prev = document.getElementById(`proc-step-${stepNum - 1}`);
+                if (prev) { prev.classList.add('done'); prev.querySelector('.proc-step-status').textContent = 'Complete ✓'; }
+                const conn = document.querySelectorAll('.proc-connector')[stepNum - 2];
+                if (conn) conn.classList.add('done');
+            }
+            const cur = document.getElementById(`proc-step-${stepNum}`);
+            if (cur) {
+                cur.classList.add('active');
+                const st = cur.querySelector('.proc-step-status');
+                if (st && statusText) st.textContent = statusText;
+            }
+        }
+
+        function finishProcSteps() {
+            for (let i = 1; i <= 3; i++) {
+                const el = document.getElementById(`proc-step-${i}`);
+                if (el) { el.classList.remove('active'); el.classList.add('done'); el.querySelector('.proc-step-status').textContent = 'Complete ✓'; }
+            }
+            document.querySelectorAll('.proc-connector').forEach(c => c.classList.add('done'));
+        }
+
+        // ==================== TIMELINE CLIP ANIMATION ====================
+        const clipColors = ['tg-clip-title','tg-clip-para','tg-clip-effect','tg-clip-option','tg-clip-question'];
+        let clipInterval = null;
+
+        function startTimelineAnimation() {
+            const tracks = ['tg-track-v2','tg-track-v3','tg-track-v4'];
+            const tasks = [
+                'Analyzing audio transcript…',
+                'Parsing slide document…',
+                'Mapping sections to timestamps…',
+                'Assigning clip templates…',
+                'Calculating timing precision…',
+                'Applying layer hierarchy…',
+                'Detecting emphasis effects…',
+                'Validating clip structure…',
+                'Finalizing master_plan.json…'
+            ];
+            let taskIdx = 0;
+            const subtitle = document.getElementById('tg-current-task');
+
+            // Rotate tasks
+            const taskTimer = setInterval(() => {
+                if (!document.getElementById('timeline-status') || document.getElementById('timeline-status').style.display === 'none') { clearInterval(taskTimer); return; }
+                taskIdx = (taskIdx + 1) % tasks.length;
+                if (subtitle) { subtitle.style.animation = 'none'; subtitle.offsetHeight; subtitle.style.animation = ''; subtitle.textContent = tasks[taskIdx]; }
+            }, 2200);
+
+            // Animate clip placement
+            clipInterval = setInterval(() => {
+                const trackId = tracks[Math.floor(Math.random() * tracks.length)];
+                const track = document.getElementById(trackId);
+                if (!track) return;
+                // Limit clips per track
+                if (track.children.length >= 8) { track.innerHTML = ''; }
+                const clip = document.createElement('div');
+                clip.className = 'tg-clip ' + clipColors[Math.floor(Math.random() * clipColors.length)];
+                const w = Math.random() * 60 + 25;
+                clip.style.cssText = `width:${w}px; animation-delay:0s;`;
+                track.appendChild(clip);
+            }, 400);
+        }
+
+        function stopTimelineAnimation() {
+            if (clipInterval) { clearInterval(clipInterval); clipInterval = null; }
+        }
+
+        // ==================== POPULATE STATS ====================
+        function populateTranscribeStats(data) {
+            const words = (data.transcription?.words || []).length;
+            document.getElementById('stat-words').textContent = words > 0 ? words.toLocaleString() : '—';
+            // Estimate duration from last word
+            const lastWord = data.transcription?.words?.[words - 1];
+            if (lastWord?.end) {
+                const endStr = lastWord.end; // format "MM:SS.xx"
+                const parts = endStr.split(':');
+                const secs = parts.length === 2 ? parseFloat(parts[0]) * 60 + parseFloat(parts[1]) : parseFloat(endStr);
+                const mins = Math.floor(secs / 60), sec = Math.floor(secs % 60);
+                document.getElementById('stat-duration').textContent = `${mins}:${String(sec).padStart(2,'0')}`;
+            }
+            if (data.token_usage) {
+                document.getElementById('stat-model').textContent = data.token_usage.model || '—';
+                document.getElementById('stat-tokens').textContent = fmtTokens(data.token_usage.input + data.token_usage.output);
+            }
+            // Animate numbers
+            animateCountUp('stat-words', words);
+        }
+
+        function populateTimelineStats(data) {
+            document.getElementById('stat-clips').textContent = data.clip_count || '—';
+            if (data.token_usage) {
+                document.getElementById('stat-tl-tokens').textContent = fmtTokens(data.token_usage.input + data.token_usage.output);
+                document.getElementById('stat-tl-model').textContent = data.token_usage.model || '—';
+            }
+            animateCountUp('stat-clips', data.clip_count || 0);
+        }
+
+        function animateCountUp(id, target) {
+            const el = document.getElementById(id);
+            if (!el || target === 0) return;
+            let start = 0;
+            const step = Math.ceil(target / 40);
+            const timer = setInterval(() => {
+                start = Math.min(start + step, target);
+                el.textContent = start.toLocaleString();
+                if (start >= target) clearInterval(timer);
+            }, 30);
+        }
+
         // ==================== PARTICLES ====================
         (function spawnParticles() {
             const container = document.getElementById('particles');
@@ -847,6 +1731,73 @@
                 setTimeout(() => r.remove(), 700);
             });
         });
+
+        // ==================== TOKEN WIDGET ====================
+        let tokenData = { transcribe: null, timeline: null };
+
+        function toggleTokenWidget() {
+            document.getElementById('token-widget').classList.toggle('collapsed');
+        }
+
+        function fmtTokens(n) {
+            if (n === null || n === undefined) return '—';
+            if (n >= 1000000) return (n/1000000).toFixed(2) + 'M';
+            if (n >= 1000) return (n/1000).toFixed(1) + 'K';
+            return n.toString();
+        }
+
+        function updateTokenWidget() {
+            const t = tokenData.transcribe;
+            const tl = tokenData.timeline;
+            const hasAny = t || tl;
+
+            document.getElementById('token-empty-state').style.display = hasAny ? 'none' : 'block';
+
+            // Grand total
+            const grandTotal = (t ? (t.input + t.output) : 0) + (tl ? (tl.input + tl.output) : 0);
+            document.getElementById('token-grand-total').innerHTML =
+                grandTotal > 0 ? `${fmtTokens(grandTotal)} <span class="unit">tok</span>` : '— <span class="unit">tok</span>';
+
+            // Phase 1
+            if (t) {
+                document.getElementById('phase-transcribe').style.display = 'block';
+                const total = t.input + t.output;
+                document.getElementById('transcribe-total-tokens').textContent = fmtTokens(total);
+                document.getElementById('transcribe-input-tokens').textContent = fmtTokens(t.input);
+                document.getElementById('transcribe-output-tokens').textContent = fmtTokens(t.output);
+                document.getElementById('transcribe-model').textContent = t.model || '—';
+                // Bar width relative to grand total
+                setTimeout(() => {
+                    document.getElementById('transcribe-bar').style.width =
+                        grandTotal > 0 ? `${(total/grandTotal)*100}%` : '0%';
+                }, 100);
+            }
+
+            // Phase 2
+            if (tl) {
+                document.getElementById('phase-timeline').style.display = 'block';
+                document.getElementById('token-divider').style.display = t ? 'block' : 'none';
+                const total = tl.input + tl.output;
+                document.getElementById('timeline-total-tokens').textContent = fmtTokens(total);
+                document.getElementById('timeline-input-tokens').textContent = fmtTokens(tl.input);
+                document.getElementById('timeline-output-tokens').textContent = fmtTokens(tl.output);
+                document.getElementById('timeline-model').textContent = tl.model || '—';
+                setTimeout(() => {
+                    document.getElementById('timeline-bar').style.width =
+                        grandTotal > 0 ? `${(total/grandTotal)*100}%` : '0%';
+                }, 150);
+            }
+
+            // Recalculate bars relative to each other
+            if (t && tl) {
+                const t1 = t.input + t.output, t2 = tl.input + tl.output;
+                const max = Math.max(t1, t2);
+                setTimeout(() => {
+                    document.getElementById('transcribe-bar').style.width = `${(t1/max)*100}%`;
+                    document.getElementById('timeline-bar').style.width = `${(t2/max)*100}%`;
+                }, 200);
+            }
+        }
 
         // ==================== APP STATE ====================
         let uploadedFiles = [];
@@ -922,20 +1873,28 @@
             btn.disabled = true; btn.innerHTML = '<div class="spinner white"></div> Processing…';
             status.style.display = 'block'; result.style.display = 'none';
             setStep(3, 'active'); setStep(4, '');
+            buildProcessingWave();
+            setProcStep(1, 'active', 'Combining files…');
+
             const fd = new FormData();
             uploadedFiles.forEach(f => fd.append('files', f));
             fd.append('file_order', uploadedFiles.map(f => f.name).join(','));
             try {
                 msg.innerHTML = '<div class="spinner"></div><span>Uploading and merging audio files…</span>'; msg.className = 'status-msg info';
+                setTimeout(() => setProcStep(2, 'active', 'Uploading to Gemini…'), 1200);
+                setTimeout(() => setProcStep(3, 'active', 'Transcribing with AI…'), 2800);
                 const resp = await fetch('/process/', { method: 'POST', body: fd }), data = await resp.json();
                 if (data.status === 'success') {
                     transcriptionData = data.transcription; mergedAudioUrl = data.merged_audio_url;
+                    finishProcSteps();
                     setStep(3, 'done'); setStep(4, 'done');
                     document.getElementById('line-2').classList.add('done'); document.getElementById('line-3').classList.add('done');
                     document.getElementById('word-count-badge').textContent = `${(data.transcription.words||[]).length} words`;
                     document.getElementById('transcription-text').textContent = JSON.stringify(data.transcription, null, 2);
                     status.style.display = 'none'; result.style.display = 'block';
                     document.getElementById('current-transcription-notice').style.display = 'block';
+                    populateTranscribeStats(data);
+                    if (data.token_usage) { tokenData.transcribe = data.token_usage; updateTokenWidget(); }
                     btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Done!`; btn.disabled = false;
                     setTimeout(() => { btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Merge & Transcribe`; }, 2500);
                 } else throw new Error(data.message || 'Processing failed');
@@ -975,6 +1934,7 @@
             const msg = document.getElementById('timeline-msg'), result = document.getElementById('timeline-result');
             btn.disabled = true; btn.innerHTML = '<div class="spinner white"></div> Generating…';
             status.style.display = 'block'; result.style.display = 'none';
+            startTimelineAnimation();
             const fd = new FormData();
             fd.append('transcription_json', timelineJsonFile || document.getElementById('json-input').files[0]);
             fd.append('slide_doc', document.getElementById('doc-input').files[0]);
@@ -982,14 +1942,18 @@
                 msg.innerHTML = '<div class="spinner"></div><span>Sending to Gemini — this may take a minute…</span>'; msg.className = 'status-msg info';
                 const resp = await fetch('/generate-timeline/', { method: 'POST', body: fd }), data = await resp.json();
                 if (data.status === 'success') {
+                    stopTimelineAnimation();
                     document.getElementById('clip-count-badge').textContent = `${data.clip_count} clips`;
                     document.getElementById('timeline-output').textContent = JSON.stringify(data.plan, null, 2);
                     document.getElementById('download-timeline-btn').onclick = () => window.open(data.download_url, '_blank');
                     status.style.display = 'none'; result.style.display = 'block';
+                    populateTimelineStats(data);
+                    if (data.token_usage) { tokenData.timeline = data.token_usage; updateTokenWidget(); }
                     btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Done!`;
                     setTimeout(() => { btn.disabled = false; btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="16 2 12 7 8 2"/></svg> Generate master_plan.json`; }, 2500);
                 } else throw new Error(data.message || 'Failed');
             } catch (err) {
+                stopTimelineAnimation();
                 msg.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg><span>${err.message}</span>`;
                 msg.className = 'status-msg error'; btn.disabled = false;
                 btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="16 2 12 7 8 2"/></svg> Generate master_plan.json`;

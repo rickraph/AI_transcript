@@ -7,3 +7,5 @@ google-genai
 python-dotenv
 aiofiles
 audioop-lts
+python-docx
+PyPDF2
